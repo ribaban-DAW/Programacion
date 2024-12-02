@@ -1,3 +1,8 @@
 /bin/
 .project
 .classpath
+.settings
+*.zip
+*.cld
+*.class
+*module-info.java
