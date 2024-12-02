@@ -1,4 +1,4 @@
-package EjercicioArrays2;
+package EjercicioArrays;
 
 public class Ejercicio11 {
 

@@ -1,4 +1,4 @@
-package Simulacion;
+package SimulacionTienda;
 
 //'implements java.io.Serializable' es para que el objeto sea serializable
 //https://www.baeldung.com/java-serialization

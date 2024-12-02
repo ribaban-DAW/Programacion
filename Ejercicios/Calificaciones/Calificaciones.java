@@ -1,4 +1,4 @@
-package calificaciones;
+package Calificaciones;
 import java.util.*;
 
 public class Calificaciones {

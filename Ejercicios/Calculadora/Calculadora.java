@@ -1,4 +1,4 @@
-package calculadora;
+package Calculadora;
 import java.util.*;
 
 public class Calculadora {

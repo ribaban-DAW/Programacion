@@ -1,4 +1,4 @@
-package Simulacion;
+package SimulacionTienda;
 
 public class Tienda {
 	public static void main(String[] args) {

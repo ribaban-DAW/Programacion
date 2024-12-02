@@ -14,7 +14,7 @@ import java.util.Scanner;
  *        En lugar de tenerlo en la clase Cuenta.
  */
 
-public class Cuenta {
+public class Cuenta2 {
 	/**
 	 * Este array contiene las OPCIONES que tiene la cuenta,
 	 * lo guardo aquí porque así añadir más OPCIONES es más
@@ -38,21 +38,21 @@ public class Cuenta {
 	private double interes;
 	private double saldo;
 
-	public Cuenta() {
+	public Cuenta2() {
 		setNombre("");
 		setIban("");
 		setInteres(0);
 		setSaldo(0);
 	}
 
-	public Cuenta(String nombre, String iban, double interes, double saldo) {
+	public Cuenta2(String nombre, String iban, double interes, double saldo) {
 		setNombre(nombre);
 		setIban(iban);
 		setInteres(interes);
 		setSaldo(saldo);
 	}
 
-	public Cuenta(Cuenta that) throws IllegalArgumentException {
+	public Cuenta2(Cuenta2 that) throws IllegalArgumentException {
 		setNombre(that.nombre);
 		setIban(that.iban);
 		setInteres(that.interes);
@@ -144,7 +144,7 @@ public class Cuenta {
 		return (true);
 	}
 
-	public boolean transferencia(Cuenta that, double cantidad) {
+	public boolean transferencia(Cuenta2 that, double cantidad) {
 		if (!this.reintegro(cantidad)) {
 			System.err.println("Como el reintegro no se ha realizado, no se ha realizado la transferencia");
 			return (false);
@@ -193,8 +193,8 @@ public class Cuenta {
 		return (resultado);
 	}
 
-	public static Cuenta crearCuenta() {
-		Cuenta cuenta = new Cuenta();
+	public static Cuenta2 crearCuenta() {
+		Cuenta2 cuenta = new Cuenta2();
 		String temp = "";
 
 		// Obtener el nombre
@@ -244,14 +244,14 @@ public class Cuenta {
 	}
 
 	public static void cajero() {
-		Cuenta cuentaExistente = new Cuenta("Paco", "ES1212341234123412341234", 10, 10000);
-		Cuenta cuentaParaTransferencias = new Cuenta("Minerva", "ES4243214321432143214321", 5, 50000);
-		Cuenta cuenta2ParaTransferencias = new Cuenta("Einstein", "ES4242424242424242424242", 0, 300000);
-		Cuenta[] cuentasParaTransferencias = {
+		Cuenta2 cuentaExistente = new Cuenta2("Paco", "ES1212341234123412341234", 10, 10000);
+		Cuenta2 cuentaParaTransferencias = new Cuenta2("Minerva", "ES4243214321432143214321", 5, 50000);
+		Cuenta2 cuenta2ParaTransferencias = new Cuenta2("Einstein", "ES4242424242424242424242", 0, 300000);
+		Cuenta2[] cuentasParaTransferencias = {
 				cuentaParaTransferencias,
 				cuenta2ParaTransferencias,
 		};
-		Cuenta cuenta = new Cuenta(cuentaExistente);
+		Cuenta2 cuenta = new Cuenta2(cuentaExistente);
 		int opcion = -1;
 
 		while (true) {
@@ -335,7 +335,7 @@ public class Cuenta {
 					}
 				} while (opcionCuenta < 1 || opcionCuenta > cuentasParaTransferencias.length);
 				--opcionCuenta;
-				Cuenta destino = cuentasParaTransferencias[opcionCuenta];
+				Cuenta2 destino = cuentasParaTransferencias[opcionCuenta];
 				String temp = "";
 				while (temp.isEmpty()) {
 					System.out.print("Introduce tu cantidad: ");

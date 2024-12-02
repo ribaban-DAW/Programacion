@@ -1,4 +1,4 @@
-package Etiqueta;
+package Examen1_Etiqueta;
 
 public class Etiqueta {
 	private static final String REGEX_TAG = "^\\d{4}\\-[a-zA-Z0-9]{5}/\\d{2}_\\d$";

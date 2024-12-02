@@ -1,4 +1,4 @@
-package horario;
+package Horario;
 import java.util.*;
 
 public class Horario {
