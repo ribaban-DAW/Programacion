@@ -102,8 +102,8 @@ public class Horario {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("Introduce la primera letra de la semana (L, M, X, J, V, S, D): ");
 		String s = sc.nextLine();
-		if (s.length() > 1) {
-			System.out.println("Error: no has introducido una letra");
+		if (s.length() != 1) {
+			System.err.println("Error: No has introducido una letra");
 			sc.close();
 			return ;
 		}
