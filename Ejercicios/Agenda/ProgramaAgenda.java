@@ -81,12 +81,6 @@ public class ProgramaAgenda {
 		else {
 			System.err.println("No se ha podido añadir a la agenda de contactos");
 		}
-		if (agenda.anadirContacto(new ContactoPersona("Barz", "33", "34"))) {
-			System.out.println("Se ha añadido a la agenda de contactos");
-		}
-		else {
-			System.err.println("No se ha podido añadir a la agenda de contactos");
-		}
 		
 		agenda.listarContactos();
 	}
