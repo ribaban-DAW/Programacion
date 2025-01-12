@@ -17,6 +17,7 @@ public class SistemaBiblioteca {
 		listarUsuarios();
 		listarHistorial();
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
+		realizarDescarga(usuarios[0], (LibroDigital)libros[0]);
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
 		realizarPrestamo(usuarios[1], (LibroFisico)libros[1]);
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
@@ -58,8 +59,7 @@ public class SistemaBiblioteca {
 		for (int i = 0; i < libros.length && contadorHistorial < historial.length; ++i) {
 			if (libros[i] != null && libros[i].getTitulo().equals(libro.getTitulo())) {
 				if (usuario.prestarLibro(libro)) {					
-					historial[contadorHistorial] = String.format("El usuario %s ha prestado el libro %s", usuario.getNombre(), libro.getTitulo());
-					++contadorHistorial;
+					registrarHistorial(usuario.getNombre(), libro.getTitulo(), "Realizar préstamo");
 					System.out.println("Se ha realizado el préstamo");
 					return;
 				}
@@ -72,13 +72,17 @@ public class SistemaBiblioteca {
 		for (int i = 0; i < libros.length && contadorHistorial < historial.length; ++i) {
 			if (libros[i] != null && libros[i].getTitulo().equals(libro.getTitulo())) {
 				usuario.descargarLibro(libro);
-				historial[contadorHistorial] = String.format("El usuario %s ha descargado el libro %s", usuario.getNombre(), libro.getTitulo());
-				++contadorHistorial;
-				System.out.println("Se ha realizado la descarga");
+				registrarHistorial(usuario.getNombre(), libro.getTitulo(), "Realizar descarga");
+				System.out.println("Se ha realizado el préstamo");
 				return;
 			}
 		}
 		System.err.println("No se ha podido realizar la descarga");
+	}
+	
+	public static void registrarHistorial(String usuario, String tituloLibro, String tipoOperacion) {
+		historial[contadorHistorial] = String.format("Operación: %s, Usuario: %s Libro: %s", tipoOperacion, usuario, tituloLibro);
+		++contadorHistorial;
 	}
 	
 	public static void listarLibros() {
