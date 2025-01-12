@@ -14,8 +14,11 @@ public class CuentaCorriente extends Cuenta{
 			System.err.println("No se puede retirar cantidad negativa");
 			return;
 		}
-		if (saldo - cantidad < 0) {
-			sobregiro += (saldo - cantidad) * -1;
+
+		// Si la cantidad es mayor al saldo, entonces significa que no hay saldo suficiente
+		// entonces tiene que aumentar el sobregiro esa cantidad menos el saldo actual
+		if (cantidad > saldo) {
+			sobregiro += cantidad - saldo;
 			setSaldo(0);
 		}
 		else {
@@ -29,7 +32,9 @@ public class CuentaCorriente extends Cuenta{
 			System.err.println("No se puede consignar una cantidad negativa");
 			return;
 		}
+
 		float nuevaCantidad = cantidad - sobregiro;
+		// Actualizo el sobregiro dependiendo de la nueva cantidad
 		if (nuevaCantidad >= 0) {
 			sobregiro = 0;
 		}

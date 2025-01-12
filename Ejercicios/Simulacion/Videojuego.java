@@ -1,9 +1,7 @@
-package SimulacionTienda;
+package Simulacion;
 
-// NOTA: Al final la serialización no hace falta, así que esas partes se puede obviar
-
-// 'implements java.io.Serializable' es para que el objeto sea serializable
-// https://www.baeldung.com/java-serialization
+//'implements java.io.Serializable' es para que el objeto sea serializable
+//https://www.baeldung.com/java-serialization
 public class Videojuego extends Producto implements java.io.Serializable {
 	private static final long serialVersionUID = 1L; // Esto también es para la serialización
 	String genero;

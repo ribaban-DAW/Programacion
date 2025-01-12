@@ -1,6 +1,17 @@
 package EjercicioArrays;
-
 import java.util.Scanner;
+
+/**
+ * 12. Crea un programa que cree un array de 10 enteros y luego muestre el siguiente menú con distintas opciones:
+ *
+ *     a. Mostrar valores.
+ *     b. Introducir valor.
+ *     c. Salir.
+ *
+ * La opción ‘a’ mostrará todos los valores por pantalla.
+ * La opción ‘b’ pedirá un valor V y una posición P, luego escribirá V en la posición P del array.
+ * El menú se repetirá indefinidamente hasta que el usuario elija la opción ‘c’ que terminará el programa.
+ */
 
 public class Ejercicio12 {
 
@@ -12,17 +23,23 @@ public class Ejercicio12 {
 		
 		do {			
 			System.out.println("""
-					======================================
-					MENU
+					=======================================
+					                  MENU
 					
-					a. Mostrar valores
-					b. Introducir valor en una posición
-					c. Salir
-					======================================
+					  a. Mostrar valores
+					  b. Introducir valor en una posición
+					  c. Salir
+					=======================================
 					""");
 			System.out.print("Introduce una opción: ");
-			opcion = sc.nextLine().charAt(0);
-			
+
+			// Lo almaceno en una variable temporal, para poder verificar que introduce al menos un carácter
+			String tmp = sc.nextLine();
+			if (tmp.length() < 1) {
+				continue;
+			}
+
+			opcion = tmp.charAt(0);
 			switch (opcion) {
 			case 'a': // Mostrar valores
 				for (int i = 0; i < arr.length; ++i) {

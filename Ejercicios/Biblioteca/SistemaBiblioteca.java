@@ -3,7 +3,7 @@ package Biblioteca;
 public class SistemaBiblioteca {
 	private static Libro[] libros = new Libro[5];
 	private static Usuario[] usuarios = new Usuario[5];
-	private static String[] historial = new String[5];
+	private static String[] historial = new String[100];
 	private static int contadorLibros = 0;
 	private static int contadorUsuarios = 0;
 	private static int contadorHistorial = 0;
@@ -23,6 +23,8 @@ public class SistemaBiblioteca {
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
 		realizarPrestamo(usuarios[0], (LibroFisico)libros[1]);
+		realizarDescarga(usuarios[0], (LibroDigital)libros[0]);
+		realizarDescarga(usuarios[1], (LibroDigital)libros[0]);
 		listarLibros();
 		listarUsuarios();
 		listarHistorial();
@@ -72,7 +74,7 @@ public class SistemaBiblioteca {
 				usuario.descargarLibro(libro);
 				historial[contadorHistorial] = String.format("El usuario %s ha descargado el libro %s", usuario.getNombre(), libro.getTitulo());
 				++contadorHistorial;
-				System.out.println("Se ha realizado el préstamo");
+				System.out.println("Se ha realizado la descarga");
 				return;
 			}
 		}

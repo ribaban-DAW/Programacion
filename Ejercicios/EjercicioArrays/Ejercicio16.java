@@ -1,6 +1,13 @@
 package EjercicioArrays;
-
 import java.util.Arrays;
+
+/**
+ * 16. Crea un programa que cree un array de enteros e introduzca la siguiente secuencia de valores:
+ *
+ *      1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, etc.
+ *
+ * hasta introducir 10 diez veces, y luego la muestre por pantalla. En esta ocasión has de utilizar Arrays.fill()
+ */
 
 public class Ejercicio16 {
 
@@ -20,7 +27,7 @@ public class Ejercicio16 {
 			pos += i;
 		}
 		
-		// Imprimir el número
+		// Imprimir los números
 		for (int i = 0; i < cantidad; ++i) {
 			if (i < cantidad - 1) {				
 				System.out.printf("%d, ", arr[i]);

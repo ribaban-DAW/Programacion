@@ -1,9 +1,7 @@
-package SimulacionTienda;
+package Simulacion;
 
-// NOTA: Al final la serialización no hace falta, así que esas partes se puede obviar
-
-// 'implements java.io.Serializable' es para que el objeto sea serializable
-// https://www.baeldung.com/java-serialization
+//'implements java.io.Serializable' es para que el objeto sea serializable
+//https://www.baeldung.com/java-serialization
 public class Producto implements java.io.Serializable {
 	private static final long serialVersionUID = 1L; // Esto también es para la serialización
 	private int codigo;
@@ -11,6 +9,12 @@ public class Producto implements java.io.Serializable {
 	private double precio;
 
 	public Producto(int codigo, String nombre, double precio) {
+		if (codigo < 0) {
+			throw new IllegalArgumentException("El código no puede ser negativo");
+		}
+		if (precio < 0) {
+			throw new IllegalArgumentException("El precio no puede ser negativo");
+		}
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.precio = precio;
@@ -45,5 +49,9 @@ public class Producto implements java.io.Serializable {
 		System.out.printf("Código: %d%n", codigo);
 		System.out.printf("Nombre: %s%n", nombre);
 		System.out.printf("Precio: %.2f€%n", precio);
+	}
+	
+	public static void main(String[] a) {
+		new Producto(5, "Hola", -1);
 	}
 }

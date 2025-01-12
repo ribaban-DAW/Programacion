@@ -31,6 +31,9 @@ public class Cuenta2 {
 			"TRANSFERENCIA",
 			"SALIR",
 	};
+
+	// Este Scanner propio es para poder cerrar el scanner una vez se termine de
+	// usar la clase, pero en realidad no sirve para nada actualmente.
 	private static final Scanner SC = new Scanner(System.in);
 
 	private String nombre;
@@ -253,12 +256,18 @@ public class Cuenta2 {
 		};
 		Cuenta2 cuenta = new Cuenta2(cuentaExistente);
 		int opcion = -1;
+		boolean loginSuccess = false;
 
-		while (true) {
-			if (!inicioSesion()) {
+		// Bucle para iniciar sesión
+		while (!loginSuccess) {
+			loginSuccess = inicioSesion();
+
+			// Si falla el inicio de sesión, es decir, no existe el IBAN, permite crear una cuenta
+			if (!loginSuccess) {
 				System.out.println("Ha fallado el inicio de sesión, ¿te gustaría crear una cuenta? (s/n)");
 				String temp = SC.nextLine();
 				char opcion2 = temp.toLowerCase().charAt(0);
+
 				if (temp.length() != 1 || opcion2 != 's') {
 					if (opcion2 != 'n' || temp.length() != 1) {
 						System.err.println("Opción inválida");
@@ -266,11 +275,14 @@ public class Cuenta2 {
 					System.out.println("Volviendo al inicio...");
 					continue;
 				}
+
 				cuenta = crearCuenta();
 			}
-			break;
 		}
+
+		// Bucle para las acciones una vez iniciado sesión
 		do {
+
 			do {
 				System.out.printf("Hola %s%n", cuenta.getNombre());
 				mostrarMenu();
@@ -285,76 +297,80 @@ public class Cuenta2 {
 					System.err.printf("Opción inválida, solo puede tener números del 1 al %d%n", OPCIONES.length);
 				}
 			} while (opcion < 1 || opcion > OPCIONES.length);
+
+			// NOTA: Los case tienen scope (llaves {}), porque cada caso es igual, cambiando pequeños detalles
+			// entonces me daba pereza crear una función para cada caso y lo más sencillo era copy paste y con
+			// limitando el scope evito el conflicto de variables con el mismo nombre
 			switch (opcion) {
-			case 1: {
-				System.out.println("Vas a realizar un integro...");
-				String temp = "";
-				while (temp.isEmpty()) {
-					System.out.print("Introduce tu cantidad: ");
-					temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
-					if (temp.isEmpty()) {
-						System.err.println("Cantidad inválida, solo puede tener números positivos");
+				case 1: {
+					System.out.println("Vas a realizar un integro...");
+					String temp = "";
+					while (temp.isEmpty()) {
+						System.out.print("Introduce tu cantidad: ");
+						temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
+						if (temp.isEmpty()) {
+							System.err.println("Cantidad inválida, solo puede tener números positivos");
+						}
 					}
+					cuenta.ingreso(Double.parseDouble(temp));
+					System.out.println(cuenta);
+					break;
 				}
-				cuenta.ingreso(Double.parseDouble(temp));
-				System.out.println(cuenta);
-				break;
-			}
-			case 2: {
-				System.out.println("Vas a realizar un reintegro...");
-				String temp = "";
-				while (temp.isEmpty()) {
-					System.out.print("Introduce tu cantidad: ");
-					temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
-					if (temp.isEmpty()) {
-						System.err.println("Cantidad inválida, solo puede tener números positivos");
+				case 2: {
+					System.out.println("Vas a realizar un reintegro...");
+					String temp = "";
+					while (temp.isEmpty()) {
+						System.out.print("Introduce tu cantidad: ");
+						temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
+						if (temp.isEmpty()) {
+							System.err.println("Cantidad inválida, solo puede tener números positivos");
+						}
 					}
+					cuenta.reintegro(Double.parseDouble(temp));
+					System.out.println(cuenta);
+					break;
 				}
-				cuenta.reintegro(Double.parseDouble(temp));
-				System.out.println(cuenta);
-				break;
-			}
-			case 3: {
-				System.out.println("Vas a realizar una transferencia...");
-				int opcionCuenta = -1;
-				do {
-					System.out.println("Selecciona una cuenta");
-					for (int i = 0; i < cuentasParaTransferencias.length; ++i) {
-						System.out.printf("%d. %s%n", i + 1, cuentasParaTransferencias[i].getIban());
+				case 3: {
+					System.out.println("Vas a realizar una transferencia...");
+					int opcionCuenta = -1;
+					do {
+						System.out.println("Selecciona una cuenta");
+						for (int i = 0; i < cuentasParaTransferencias.length; ++i) {
+							System.out.printf("%d. %s%n", i + 1, cuentasParaTransferencias[i].getIban());
+						}
+						System.out.print("> ");
+						String temp = pedirStringConPatron(Pattern.compile("^[1-2]$"));
+						if (temp.isEmpty()) {
+							System.err.printf("Opción inválida, debe ser un número del 1 al %d%n", cuentasParaTransferencias.length);
+							continue;
+						}
+						opcionCuenta = Integer.parseInt(temp);
+						if (opcionCuenta < 1 || opcionCuenta > cuentasParaTransferencias.length) {
+							System.err.printf("Opción inválida, solo puede tener números del 1 al %d%n",
+									cuentasParaTransferencias.length);
+						}
+					} while (opcionCuenta < 1 || opcionCuenta > cuentasParaTransferencias.length);
+					--opcionCuenta;
+					Cuenta2 destino = cuentasParaTransferencias[opcionCuenta];
+					String temp = "";
+					while (temp.isEmpty()) {
+						System.out.print("Introduce tu cantidad: ");
+						temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
+						if (temp.isEmpty()) {
+							System.err.println("Cantidad inválida, solo puede tener números positivos");
+						}
 					}
-					System.out.print("> ");
-					String temp = pedirStringConPatron(Pattern.compile("^[1-2]$"));
-					if (temp.isEmpty()) {
-						System.err.printf("Opción inválida, debe ser un número del 1 al %d%n", cuentasParaTransferencias.length);
-						continue;
-					}
-					opcionCuenta = Integer.parseInt(temp);
-					if (opcionCuenta < 1 || opcionCuenta > cuentasParaTransferencias.length) {
-						System.err.printf("Opción inválida, solo puede tener números del 1 al %d%n",
-								cuentasParaTransferencias.length);
-					}
-				} while (opcionCuenta < 1 || opcionCuenta > cuentasParaTransferencias.length);
-				--opcionCuenta;
-				Cuenta2 destino = cuentasParaTransferencias[opcionCuenta];
-				String temp = "";
-				while (temp.isEmpty()) {
-					System.out.print("Introduce tu cantidad: ");
-					temp = pedirStringConPatron(Pattern.compile("^(\\d+\\.\\d+|\\d+)$"));
-					if (temp.isEmpty()) {
-						System.err.println("Cantidad inválida, solo puede tener números positivos");
-					}
+					cuenta.transferencia(destino, Double.parseDouble(temp));
+					System.out.println(cuenta);
+					System.out.println(destino);
+					break;
 				}
-				cuenta.transferencia(destino, Double.parseDouble(temp));
-				System.out.println(cuenta);
-				System.out.println(destino);
-				break;
-			}
-			case 4:
-				System.out.println("Cerrando sesión...");
-				break;
-			default:
-				System.out.println("Esta funcionalidad aún no está implementada...");
-				break;
+				case 4:
+					System.out.println("Cerrando sesión...");
+					break;
+				default:
+					System.out.println("Esta funcionalidad aún no está implementada...");
+					break;
 			}
 		} while (opcion != OPCIONES.length);
 	}

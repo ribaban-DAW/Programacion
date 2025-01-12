@@ -1,6 +1,18 @@
 package Examen1_Etiqueta;
 
 public class Etiqueta {
+	/** Explicación del regex (REGular EXpression)
+	 * 
+	 *     ^                   Inicio del regex
+	 *     \\d{4}              4 dígitos
+	 *     \\-                 Un guion
+	 *     [a-zA-Z0-9]{5}      5 alfanuméricos (ASCII)
+	 *     /                   Una barra diagonal
+	 *     \\d{2}              2 dígitos
+	 *     _                   Una barra baja
+	 *     \\d                 Un dígito
+	 *     $                   Fin del regex
+	 */
 	private static final String REGEX_TAG = "^\\d{4}\\-[a-zA-Z0-9]{5}/\\d{2}_\\d$";
 	
 	private String nombreArticulo;
@@ -63,8 +75,9 @@ public class Etiqueta {
 	}
 	
 	public void agregarInventario(int cantidad) {
+		// Hago esta comprobación porque considero que reducir una cantidad de 0 no tiene sentido
 		if (cantidad < 1) {
-			System.err.println("Error, la cantidad no puede ser menor que 1"); // Hago esta comprobación porque considero que reducir una cantidad de 0 no tiene sentido
+			System.err.println("Error, la cantidad no puede ser menor que 1");
 			return;
 		}
 		System.out.printf("Incrementando el inventario %d%n", cantidad);
@@ -72,8 +85,9 @@ public class Etiqueta {
 	}
 	
 	public void reducirInventario(int cantidad) {
+		// Hago esta comprobación porque considero que reducir una cantidad de 0 no tiene sentido
 		if (cantidad < 1) {
-			System.err.println("Error, la cantidad no puede ser menor que 1"); // Hago esta comprobación porque considero que reducir una cantidad de 0 no tiene sentido
+			System.err.println("Error, la cantidad no puede ser menor que 1");
 			return;
 		}
 		if (inventario < cantidad) {
@@ -85,8 +99,9 @@ public class Etiqueta {
 	}
 	
 	public void actualizarPrecio(double nuevoPrecio) {
+		// Aquí no compruebo que sea 0, porque sí que tiene sentido un precio sea de 0 €, es decir, que sea gratis.
 		if (nuevoPrecio < 0) {
-			System.err.println("Error, el precio no puede ser negativo"); // Aquí no compruebo que sea 0, porque sí que tiene sentido un precio sea de 0 €, es decir, que sea gratis.
+			System.err.println("Error, el precio no puede ser negativo");
 			return;
 		}
 		System.out.printf("Actualizando el precio %.2f%n", nuevoPrecio);
@@ -97,13 +112,17 @@ public class Etiqueta {
 	public static void test(Etiqueta[] etiquetas) {
 		final int cantidad = 5;
 		final double precio = 3.15;
+
+		// Itero sobre el array de etiquetas
 		for (int i = 0; i < etiquetas.length; ++i) {
-			System.out.printf("Test %d%n", i + 1);
-			Etiqueta etiqueta = etiquetas[i];
+			System.out.printf("Test %d%n", i + 1); // El número del test
+			Etiqueta etiqueta = etiquetas[i]; // La etiqueta actual
+
 			if (!etiqueta.validarEtiqueta()) {
 				System.err.println("Esa etiqueta es inválida, pasando al siguiente test...");
 				continue;
 			}
+
 			System.out.println("Etiqueta válida");
 			etiqueta.mostrarArticulo();
 			etiqueta.reducirInventario(cantidad * i);

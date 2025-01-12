@@ -18,11 +18,6 @@ public class Estudiante extends Usuario {
 	
 	@Override
 	public void descargarLibro(LibroDigital libro) {
-		if (super.getLibrosPrestados() < LIMITE_LIBROS) {			
-			super.incrementarLibrosPrestados();
-			System.out.println("Se ha descargado el libro");
-			return;
-		}
-		System.err.println("No se ha podido descargar el libro");
+		System.out.println("Se ha descargado el libro" + libro.getTitulo());
 	}
 }

@@ -1,5 +1,7 @@
 package SimulacionTienda;
 
+// NOTA: Al final la serialización no hace falta, así que esas partes se puede obviar
+
 // 'implements java.io.Serializable' es para que el objeto sea serializable
 // https://www.baeldung.com/java-serialization
 public class Cliente implements java.io.Serializable {
@@ -41,7 +43,7 @@ public class Cliente implements java.io.Serializable {
 	public void comprarProducto(Producto producto) {
 		// Si no tiene saldo suficiente, muestra el error y se sale del método.
 		if (saldo < producto.getPrecio()) {
-			System.out.printf("ERROR: Saldo insuficiente. Tiene %.2f y el producto %s cuesta %.2f €%n", saldo,
+			System.err.printf("ERROR: Saldo insuficiente. Tiene %.2f y el producto %s cuesta %.2f €%n", saldo,
 					producto.getNombre(), producto.getPrecio());
 			return;
 		}

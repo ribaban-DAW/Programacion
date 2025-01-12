@@ -122,6 +122,7 @@ public class Empleado {
 	}
 	
 	public int calcularComplemento() {
+		// Si no ha hecho horas extra, no hay complemento
 		if (horasExtra < 1) {
 			return (0);
 		}

@@ -18,6 +18,7 @@ public class ProgramaAgenda {
 				new ContactoEmpresa("CE5", "10", "www.empresa5.es"),
 		};
 
+		// Añado ContactosPersonas
 		for (int i = 0; i < contactos.length; ++i) {
 			if (!agenda.anadirContacto(contactos[i])) {
 				System.err.printf("No se ha podido añadir %s a la agenda de contactos%n", contactos[i].getNombre());
@@ -26,6 +27,8 @@ public class ProgramaAgenda {
 				System.out.printf("Se ha añadido %s a la agenda de contactos%n", contactos[i].getNombre());
 			}
 		}
+
+		// Añado ContactosEmpresas
 		for (int i = 0; i < contactos2.length; ++i) {
 			if (!agenda.anadirContacto(contactos2[i])) {
 				System.err.printf("No se ha podido añadir %s a la agenda de contactos%n", contactos2[i].getNombre());
@@ -37,6 +40,7 @@ public class ProgramaAgenda {
 
 		agenda.listarContactos();
 
+		// Intento eliminar el contacto C1
 		String nombre = "C1";
 		if (!agenda.eliminarContacto(nombre)) {
 			System.err.printf("No se ha podido eliminar el contacto %s%n", nombre);
@@ -45,6 +49,7 @@ public class ProgramaAgenda {
 			System.out.printf("El contacto %s ha sido eliminado%n", nombre);
 		}
 
+		// Intento buscar el contacto C6
 		nombre = "C6";
 		int index = agenda.buscarContacto(nombre);
 		if (index < 0) {
@@ -54,6 +59,7 @@ public class ProgramaAgenda {
 			System.out.printf("El contacto %s tiene el índice %d%n", nombre, index);
 		}
 
+		// Intento buscar el contacto CE6, y si existe lo elimino
 		nombre = "CE2";
 		index = agenda.buscarContacto(nombre);
 		if (index < 0) {
@@ -69,18 +75,23 @@ public class ProgramaAgenda {
 			}
 		}
 		
+		// Intento añadir el contacto Foo
 		if (agenda.anadirContacto(new ContactoPersona("Foo", "33", "34"))) {
 			System.out.println("Se ha añadido a la agenda de contactos");
 		}
 		else {
 			System.err.println("No se ha podido añadir a la agenda de contactos");
 		}
+
+		// Intento añadir el contacto Bar
 		if (agenda.anadirContacto(new ContactoPersona("Bar", "33", "34"))) {
 			System.out.println("Se ha añadido a la agenda de contactos");
 		}
 		else {
 			System.err.println("No se ha podido añadir a la agenda de contactos");
 		}
+
+		// Intento añadir el contacto Barz
 		if (agenda.anadirContacto(new ContactoPersona("Barz", "33", "34"))) {
 			System.out.println("Se ha añadido a la agenda de contactos");
 		}

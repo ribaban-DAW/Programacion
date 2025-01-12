@@ -1,5 +1,11 @@
 package EjercicioArrays;
 
+/**
+ * 11. Crea un programa que cree dos arrays de enteros de tamaño 100.
+ * Luego introducirá en el primer array todos los valores del 1 al 100.
+ * Por último, deberá copiar todos los valores del primer array al segundo array en orden inverso, y mostrar ambos por pantalla.
+ */
+
 public class Ejercicio11 {
 
 	public static void main(String[] args) {		
@@ -15,7 +21,7 @@ public class Ejercicio11 {
 		
 		// Copiar del array 2 al 1
 		for (int i = 0; i < SIZE; ++i) {
-			arr2[i] = arr1[SIZE - i - 1]; // - 1 para que esté en el límite
+			arr2[i] = arr1[SIZE - i - 1]; // - 1 para que esté dentro del límite
 		}
 		
 		// Imprimir los arrays

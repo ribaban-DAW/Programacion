@@ -174,6 +174,7 @@ public class ValidacionDeDatos {
 	
 	public static void verificarDato(int opcion, String dato) {
 		boolean error = false;
+
 		switch (opcion) {
 		case 1:
 			error = !validarNombre(dato);

@@ -2,7 +2,8 @@ package PracticaHerencia.src.Cuenta;
 
 public class Main {
 	public static void main(String[] args) {
-		{			
+
+		{ // Prueba de la creación de una Cuenta
 			Cuenta c = new Cuenta(2500, 15);
 			c.consignar(10500);
 			c.consignar(5);
@@ -16,7 +17,8 @@ public class Main {
 			c.extractoMensual();
 			c.imprimir();
 		}
-		{			
+
+		{ // Prueba de la creación de una CuentaAhorro
 			CuentaAhorro ca = new CuentaAhorro(15000, 23);
 			ca.consignar(10500);
 			ca.consignar(5);
@@ -30,7 +32,8 @@ public class Main {
 			ca.extractoMensual();
 			ca.imprimir();
 		}
-		{			
+
+		{ // Prueba de la creación de una CuentaCorriente
 			CuentaCorriente cc = new CuentaCorriente(1000, 10);
 			cc.consignar(10500);
 			cc.consignar(5);

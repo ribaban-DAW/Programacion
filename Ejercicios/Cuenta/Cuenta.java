@@ -71,7 +71,7 @@ public class Cuenta {
 
 	public boolean ingreso(double cantidad) {
 		if (cantidad < 0) {
-			System.out.println("No se puede ingresar una cantidad negativa");
+			System.err.println("No se puede ingresar una cantidad negativa");
 			return (false);
 		}
 		saldo += cantidad;
@@ -81,11 +81,11 @@ public class Cuenta {
 
 	public boolean reintegro(double cantidad) {
 		if (cantidad < 0) {
-			System.out.println("No se puede ingresar una cantidad negativa");
+			System.err.println("No se puede ingresar una cantidad negativa");
 			return (false);
 		}
 		if (saldo < cantidad) {
-			System.out.printf("No puedes hacer un reintegro de %.2f € porque la cuenta no tiene saldo suficiente%n",
+			System.err.printf("No puedes hacer un reintegro de %.2f € porque la cuenta no tiene saldo suficiente%n",
 					cantidad);
 			return (false);
 		}
@@ -96,7 +96,7 @@ public class Cuenta {
 
 	public boolean transferencia(Cuenta that, double cantidad) {
 		if (!this.reintegro(cantidad)) {
-			System.out.println("Como el reintegro no se ha realizado, no se ha realizado la transferencia");
+			System.err.println("Como el reintegro no se ha realizado, no se ha realizado la transferencia");
 			return (false);
 		}
 		return (that.ingreso(cantidad));
