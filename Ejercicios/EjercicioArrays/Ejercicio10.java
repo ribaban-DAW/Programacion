@@ -40,7 +40,7 @@ public class Ejercicio10 {
 		alturaMedia /= alturas.length;
 
 		// Contar personas por encima y por debajo de la media
-		for (int altura : alturas) {
+		for (double altura : alturas) {
 			if (altura > alturaMedia) {
 				++countMax;
 			}
