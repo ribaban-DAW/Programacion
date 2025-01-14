@@ -13,6 +13,7 @@ public class Agenda {
 	}
 	
 	public boolean anadirContacto(Contacto contacto) {
+		// Si existe el contacto, no lo añado.
 		if (buscarContacto(contacto.getNombre()) != -1) {
 			return (false);
 		}
@@ -20,8 +21,13 @@ public class Agenda {
 	}
 	
 	public int buscarContacto(String nombre) {
+		// Utilizo un iterador para poder iterar sobre el ArrayList
 		Iterator<Contacto> it = contactos.iterator();
+		
+		// Utilizo un bucle for para aprovechar el contador, pero la condición
+		// es que haya un siguiente elemento en el iterador
 		for (int i = 0; it.hasNext(); ++i) {
+			// Si el nombre es igual al nombre de un contacto, entonces existe
 			if (contactos.get(i).getNombre().equals(nombre)) {
 				return (i);
 			}

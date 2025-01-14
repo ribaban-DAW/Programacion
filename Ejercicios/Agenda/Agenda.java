@@ -15,14 +15,19 @@ public class Agenda {
 	}
 	
 	public boolean anadirContacto(Contacto contacto) {
+		// Si existe el contacto, no se puede añade el contacto.
 		if (existeContacto(contacto.nombre)) {
 			return (false);
 		}
+		// Si el índice es menor que al número máximo de contactos, entonces guardo el contacto y aumento el índice
+		// Esto permite añadir los contactos de una manera más "rápida"
 		if (index < contactos.length) {			
 			contactos[index] = contacto;
 			++index;
 			return (true);
 		}
+		
+		// Cuando el índice sea igual al número máximo de contactos, itero sobre el array buscando celdas en null
 		for (int i = 0; i < contactos.length; ++i) {
 			if (contactos[i] == null) {
 				contactos[i] = contacto;
