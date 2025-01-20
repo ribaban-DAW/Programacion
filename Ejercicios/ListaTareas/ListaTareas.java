@@ -9,49 +9,52 @@ public class ListaTareas {
 		tareas = new ArrayList<String>();
 	}
 	
-	
-	
-	boolean agregarTarea(String tarea) {
+	void agregarTarea(String tarea) {
 		for (String tareaActual : tareas) {
 			if (tareaActual.equals(tarea)) {
-				return (false);
+				System.err.printf("La tarea '%s' ya existe en la lista.%n", tarea);
+				return;
 			}
 		}
 		tareas.add(tarea);
-		return (true);
+		System.out.printf("Tarea agregada: %s%n", tarea);
 	}
 	
 	void mostrarTareas() {
+		if (tareas.size() == 0) {
+			System.out.println("La lista de tareas está vacía");
+			return;
+		}
 		System.out.println("Lista de tareas:");
 		for (String tarea : tareas) {
 			System.out.println("- " + tarea);
 		}
 	}
 	
-	boolean eliminarTarea(String tarea) {
+	void eliminarTarea(String tarea) {
 		Iterator<String> it = tareas.iterator();
 		
 		while (it.hasNext()) {
 			String tareaActual = it.next();
-			if (tareaActual.equals(tarea)) {
+			if (tareaActual.equalsIgnoreCase(tarea)) {
 				it.remove();
-				return (true);
+				System.out.printf("Tarea eliminada: %s%n", tarea);
+				return;
 			}
 		}
-		return (false);
+		System.err.printf("La tarea '%s' no existe en la lista de tareas%n", tarea);
 	}
 	
-	int eliminarTareasQueContienen(String palabraClave) {
+	void eliminarTareasQueContienen(String palabraClave) {
 		int contadorEliminados = 0;
 		Iterator<String> it = tareas.iterator();
-		
 		while (it.hasNext()) {
 			String tareaActual = it.next();
-			if (tareaActual.contains(palabraClave)) {
+			if (tareaActual.toLowerCase().contains(palabraClave.toLowerCase())) {
 				it.remove();
 				++contadorEliminados;
 			}
 		}
-		return (contadorEliminados);
+		System.out.printf("Se eliminaron %d tarea(s) que contenían la palabra '%s'%n", contadorEliminados, palabraClave);
 	}
 }
