@@ -32,6 +32,7 @@ public class Catalogo {
 		if (p == null) {
 			throw new IllegalArgumentException("El producto con ese id no existe");
 		}
+		p.setPrecio(precio);
 		System.out.printf("El precio del producto %d se ha actualizado%n", id);
 	}
 	

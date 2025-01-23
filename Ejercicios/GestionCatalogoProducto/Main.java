@@ -75,7 +75,12 @@ public class Main {
 					System.err.println("El id no es válido");
 					continue;
 				}
-				c.eliminarProducto(id);
+				try {
+					c.eliminarProducto(id);
+				}
+				catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			}
 			case 3: // Actualizar producto
@@ -106,7 +111,12 @@ public class Main {
 					System.err.println("El precio no es válido");
 					continue;
 				}
-				c.actualizarProducto(id, precio);
+				try {
+					c.actualizarProducto(id, precio);
+				}
+				catch (Exception e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			}
 			case 4: // Consultar producto
@@ -136,6 +146,7 @@ public class Main {
 			case 5: // Mostrar productos
 			{
 				c.mostrarProductos();
+				break;
 			}
 			case 6: // Verificar producto
 			{
@@ -162,6 +173,7 @@ public class Main {
 			}
 			case 7: // Vaciar catálogo
 				c.vaciarCatalogo();
+				break;
 			case 8: // Salir
 				System.out.println("Cerrando el catálogo");
 				break;
