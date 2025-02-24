@@ -6,9 +6,11 @@ import java.util.function.*;
 public class Ejercicio2 {
     public static void main(String[] args) {
         // Implementar un Consumer que imprima un texto en mayúsculas
-    	Consumer<String> imprimirMayusculas = String::toUpperCase;
+    	Consumer<String> imprimirMayusculas = (texto) -> System.out.println(texto.toUpperCase());
         // Implementar un BiConsumer que imprima un nombre y una edad formateados
     	BiConsumer<String, Integer> imprimirNombreEdad = (nombre, edad) -> System.out.printf("Nombre: %s, Edad: %d%n", nombre, edad);
-    	
+
+		imprimirMayusculas.accept("hola cómo estás ");
+		imprimirNombreEdad.accept("Yo", 21);
     }
 }
