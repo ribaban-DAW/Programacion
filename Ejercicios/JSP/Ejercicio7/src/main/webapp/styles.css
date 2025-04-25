@@ -1,0 +1,18 @@
+:root {
+	color-scheme: dark light;
+	--background-primary: #222222;
+	--foreground-primary: #dddddd;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--background-primary: #ddd;
+		--foreground-primary: #222;
+	}
+}
+
+body {
+	background-color: var(--background-primary);
+	color: var(--foreground-primary);
+	text-align: center;
+}

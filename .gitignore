@@ -6,3 +6,6 @@
 *.cld
 *.class
 *module-info.java
+
+**/.metadata
+**/Servers
