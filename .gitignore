@@ -1,6 +1,4 @@
 /bin/
-.project
-.classpath
 .settings
 *.zip
 *.cld
