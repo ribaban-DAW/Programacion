@@ -1,0 +1,51 @@
+:root {
+	color-scheme: dark light;
+	--background-primary: #222222;
+	--foreground-primary: #dddddd;
+	--blue: #2222ff;
+	--red: #ff2222;
+	--yellow: #aaaa00;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--background-primary: #ddd;
+		--foreground-primary: #222;
+		--blue: #aaaaff;
+		--red: #ffaaaa;
+		--yellow: #ffffaa;
+	}
+}
+
+body {
+	background-color: var(--background-primary);
+	color: var(--foreground-primary);
+	text-align: center;
+}
+
+img {
+	width: 240px;
+	height: auto;
+}
+
+section {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+article {
+	display:flex;
+	flex-direction:column;
+	background-color: var(--blue);
+	
+	p:first-child {
+		padding: 2em 0;
+		background-color: var(--red);
+	}
+	
+	p+p {
+		padding: 1em 0;
+		background-color: var(--yellow);
+	}
+}
