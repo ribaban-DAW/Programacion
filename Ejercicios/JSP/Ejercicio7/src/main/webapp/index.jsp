@@ -15,7 +15,7 @@
 			<option value="pesetas">€ -> ₧</option>
 			<option value="euros">₧ -> €</option>
 		</select>
-		<button type="submit"">Convertir</button>
+		<button type="submit">Convertir</button>
 	</form>
 	<div>
 		<p style="visibility: hidden;">a</p>
