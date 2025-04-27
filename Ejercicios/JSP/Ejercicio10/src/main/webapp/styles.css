@@ -1,6 +1,7 @@
 :root {
 	color-scheme: dark light;
-	--background-primary: #222222;
+	--background-primary: #222;
+	--background-primary-tint: #333;
 	--foreground-primary: #dddddd;
 	--red: #ff0000;
 }
@@ -8,6 +9,7 @@
 @media (prefers-color-scheme: light) {
 	:root {
 		--background-primary: #ddd;
+		--background-primary-tint: #eee;
 		--foreground-primary: #222;
 		--red: #ffaaaa;
 	}
@@ -17,26 +19,45 @@ body {
 	background-color: var(--background-primary);
 	color: var(--foreground-primary);
 	text-align: center;
+	min-width: 20rem;
 }
 
 fieldset {
+	display: flex;
 	padding: 1em;
+	justify-content: center;
+	margin-bottom: 1em;
 	
 	legend {
 		background-color: var(--red);
-		width: auto;
+		width: 80%;
 		margin-left: auto;
 		margin-right: auto;
+		padding: 0.25em;
+	}
+	
+	div {
+		display: flex;
+		padding: 0.5em 1em;
+		width: 80%;
+		flex-direction: column;
+		align-items: start;
+		background-color: var(--background-primary-tint);
 	}
 	
 	label {
-		input {
-			margin-bottom: 2em;
-		}
+		margin: 0.5em 0em;
+		width: 100%;
+		text-align: left;
+		line-height: 1.5em;
+	}
+	
+	label:hover {
+		background-color: var(--background-primary);
 	}
 }
 
 img {
-	width: 480px;
-	height: auto;
+	width: 75%;
+	max-width: 480px;
 }

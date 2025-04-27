@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>${resultado}</h1>
+<h1>${resultado} / ${total}</h1>
 <p>${mensaje}</p>
 <p><a href="index.jsp">Intentar de nuevo</a></p>
 <img src="${url}"></img>

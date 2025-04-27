@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>Cuestionario cuestionable</h1>
-	<form method="post", action="CuestionarioServlet">
+	<form method="post" action="CuestionarioServlet">
 		<%
 			Cuestionario cuestionario = new Cuestionario();
 			out.println(cuestionario);

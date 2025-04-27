@@ -29,6 +29,8 @@ public class CuestionarioServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
     	int resultado = 0;
+    	int totalPreguntas = 0;
+    	
     	for (int i = 1;; ++i) {
     		String idString = request.getParameter("" + i);
     		if (idString == null) {
@@ -36,12 +38,14 @@ public class CuestionarioServlet extends HttpServlet {
     		}
     		int id = Integer.parseInt(idString);
     		if (id == 1) {    			
-    			resultado++;
+    			++resultado;
     		}
+    		++totalPreguntas;
     	}
+    	
     	String mensaje;
     	String url;
-    	if (resultado >= 5) {   
+    	if (resultado >= totalPreguntas / 2) {   
     		String[] mensajes = {
     				String.format("Locura, un %d", resultado),
     				String.format("Increíble, has sacado un %d", resultado),
@@ -59,8 +63,10 @@ public class CuestionarioServlet extends HttpServlet {
     		mensaje = mensajes[index];
     		url = "chopper-crying.gif";
     	}
+    	
     	request.setAttribute("mensaje", mensaje);
     	request.setAttribute("resultado", resultado);
+    	request.setAttribute("total", totalPreguntas);
     	request.setAttribute("url", url);
     	request.getRequestDispatcher("resultado.jsp").forward(request, response);
 	}
