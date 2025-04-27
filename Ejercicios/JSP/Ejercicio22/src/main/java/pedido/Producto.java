@@ -1,7 +1,7 @@
 package pedido;
 
 public class Producto {
-	int id;
+	private int id;
 	private String nombre;
 	private double precio;
 	private String imagenURL;
@@ -43,6 +43,10 @@ public class Producto {
 	
 	public String getImagenURL() {
 		return imagenURL;
+	}
+	
+	public int getId() {
+		return id;
 	}
 	
 	@Override
