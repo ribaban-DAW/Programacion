@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Ejercicio 7</title>
+<title>Conversor de dinero</title>
 <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Conversor de Euros a Pesetas / Pesetas a Euros</h1>
+	<h1>Conversor de dinero</h1>
 	<form method="post">
 		<input name="cantidad" type="number" value="0" step="0.01" min="0" placeholder="Introduce la cantidad" />
 		<select name="tipo">
