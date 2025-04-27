@@ -15,6 +15,7 @@ body {
 	background-color: var(--background-primary);
 	color: var(--foreground-primary);
 	text-align: center;
+	min-width: 20rem;
 }
 
 img {
