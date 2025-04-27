@@ -31,6 +31,10 @@
 					}
 					int cantidad = Integer.parseInt(cantidadString);
 					Producto producto = pedido.getProducto(id);
+					if (producto == null) {
+						System.err.printf("Producto con id '%d' no encontrado", id);
+						continue;
+					}
 					double subtotal = producto.getPrecio() * cantidad;
 					precioTotal += subtotal;
 					
@@ -46,7 +50,8 @@
 		<tfoot>
 			<tr>
 			<%
-				out.println("<th scope='row'>Total " + String.format("%.2f €", precioTotal) + "</td>");
+				out.println("<th scope='row' colspan='3'>Total</td>");
+				out.println("<td scope='row'>" + String.format("%.2f €", precioTotal) + "</td>");
 			%>
 			</tr>
 		</tfoot>

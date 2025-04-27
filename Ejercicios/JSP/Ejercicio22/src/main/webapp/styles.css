@@ -1,6 +1,7 @@
 :root {
 	color-scheme: dark light;
-	--background-primary: #222222;
+	--background-primary: #222;
+	--background-primary-tint: #333;
 	--foreground-primary: #dddddd;
 	--blue: #2222ff;
 	--red: #ff2222;
@@ -10,6 +11,7 @@
 @media (prefers-color-scheme: light) {
 	:root {
 		--background-primary: #ddd;
+		--background-primary-tint: #eee;
 		--foreground-primary: #222;
 		--blue: #aaaaff;
 		--red: #ffaaaa;
@@ -64,10 +66,26 @@ section {
 	}
 }
 
-table {
+table {	
 	text-align: left;
+	border-collapse: collapse;
+	
 	th, td {
 		padding: 0.5em 1em;
 		text-wrap: nowrap;
+	}
+
+	td {
+		text-align: right;
+	}
+	
+	tbody {
+		td:first-child {
+			text-align: left;
+		}
+	}
+	
+	tfoot {
+		background-color: var(--background-primary-tint);
 	}
 }

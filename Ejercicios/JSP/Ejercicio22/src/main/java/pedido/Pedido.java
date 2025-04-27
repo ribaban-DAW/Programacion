@@ -18,11 +18,24 @@ public class Pedido {
 		productos.add(new Producto(id++, "Refresco", 1.40, "refresco.webp"));
 	}
 	
+	public Pedido(List<Producto> productos) {
+		setProductos(productos);
+	}
+	
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
+	}
+	
 	public List<Producto> getProductos() {
 		return productos;
 	}
 	
 	public Producto getProducto(int id) {
-		return productos.get(id - 1);
+		for (Producto producto : productos) {
+			if (producto.getId() == id) {
+				return producto;
+			}
+		}
+		return null;
 	}
 }
