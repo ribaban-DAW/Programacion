@@ -22,12 +22,11 @@ public class Ejercicio1 {
 	}
 	
 	public static boolean esPrimo(int n) {
-		int ndiv = 0;
-		for (int i = 1; i < n; ++i) {
+		if (n < 2) {
+			return false;
+		}
+		for (int i = 2; i * i <= n; ++i) {
 			if (n % i == 0) {
-				++ndiv;
-			}
-			if (ndiv >= 2) {
 				return false;
 			}
 		}
