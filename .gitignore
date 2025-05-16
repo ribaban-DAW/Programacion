@@ -4,6 +4,8 @@
 *.cld
 *.class
 *module-info.java
+.env
 
+**/build
 **/.metadata
 **/Servers
