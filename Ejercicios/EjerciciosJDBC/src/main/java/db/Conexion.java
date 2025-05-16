@@ -2,7 +2,6 @@ package db;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
-import java.sql.Statement;
 
 public class Conexion {
 	private final String DEFAULT_PROTOCOL = "jdbc";
