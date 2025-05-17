@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>403</title>
+<title>500</title>
 </head>
 <body>
-	<h1>Acceso bloqueado</h1>
+	<h1>Error del servidor</h1>
 	<p><a href="index.jsp">Volver al inicio</a></p>
 </body>
 </html>

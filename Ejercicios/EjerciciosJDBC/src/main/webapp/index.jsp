@@ -5,8 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<script src="scripts/enviarFormulario.js"></script>
 </head>
 <body>
+	<div></div>
 	<form method="post">
 		<section>
 			<label>Usuario</label>
@@ -16,38 +18,24 @@
 			<label>Contraseña</label>
 			<input name="password" type="password" required/>
 		</section>
-		<div></div>
 		<button type="submit">Iniciar sesión</button>
 	</form>
 	
 	<script>
-	const form = document.getElementsByTagName('form')[0]
-	form.addEventListener('submit', (event) => {
-		event.preventDefault()
-		enviarFormulario()
-	})
-
-	function enviarFormulario() {
-		const formData = new URLSearchParams(new FormData(form))
-		
-	    fetch('LoginServlet', {
-	        method: 'POST',
-	        body: formData
-	    })
-	    .then(response => response.json())
-	    .then(data => {
-	    	if (data.status == 200) {
-	    		window.location.href = data.redirect
-	    	}
-	    	else {	    		
-		    	const div = document.getElementsByTagName('div')[0]
-		    	div.innerHTML = "<p>" + data.message + "</p>"
-	    	}
-	    })
-	    .catch(error => {
-	        console.error(error)
-	    })
-	}
+		const form = document.getElementsByTagName('form')[0]
+		form.addEventListener('submit', (event) => {
+			event.preventDefault()
+			enviarFormulario("LoginServlet")
+			.then(data => {
+				if (data.status == 400) {
+					const div = document.getElementsByTagName('div')[0]
+					div.innerHTML = "<p>" + data.message + "</p>"
+				}
+			})
+			.catch(error => {
+				console.log(error)
+			})
+		})
    </script>
 </body>
 </html>

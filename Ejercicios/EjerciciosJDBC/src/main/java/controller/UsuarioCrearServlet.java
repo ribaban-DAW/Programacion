@@ -5,27 +5,27 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import model.UsuarioModelo;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
-import dao.UsuarioDAO;
-import model.UsuarioModelo;
-import db.Conexion;
 import config.Env;
+import dao.UsuarioDAO;
+import db.Conexion;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class UsuarioCrearServlet
  */
-@WebServlet("/LoginServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/UsuarioCrearServlet")
+public class UsuarioCrearServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public UsuarioCrearServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,58 +34,50 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nombre = request.getParameter("username");
-		String contraseña = request.getParameter("password");
+		String nombre = request.getParameter("name");
+		String contraseña = request.getParameter("pass");
+		String rol = request.getParameter("role");
 		
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 		
-		if (nombre == null || contraseña == null || nombre.isBlank() || contraseña.isBlank()) {
+		if (nombre == null || contraseña == null || rol == null
+			|| nombre.isBlank() || contraseña.isBlank() || rol.isBlank()) {
 			out.print("""
 					{
 						\"status\": 400,
-						\"message\": \"Usuario o contraseña incorrectos\"
+						\"message\": \"No se ha recibido correctamente algún campo\"
 					}
 					""");
 			out.flush();
 			return;
 		}
-
+		
 		Env env = new Env();
 		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
-			UsuarioModelo usuario = new UsuarioDAO(conn).autenticar(nombre, contraseña);
-			if (usuario == null) {
+		try (Connection conn = conexion.conectar("BaseDeDatos")) {
+			UsuarioDAO dao = new UsuarioDAO(conn);
+			if (dao.buscarExacto(nombre) != null) {
 				out.print("""
 						{
 							\"status\": 400,
-							\"message\": \"Usuario o contraseña incorrectos\"
+							\"message\": \"El nombre ya existe\"
 						}
 						""");
-				out.flush();
-				return;
 			}
-			HttpSession session = request.getSession();
-			session.setAttribute("user", usuario);
-			if (usuario.getRol().equals("admin")) {
+			else {
+				dao.crear(new UsuarioModelo(null, nombre, rol), contraseña);
 				out.print("""
 						{\"status\": 200,
 						\"redirect\": \"PanelAdminServlet\"
 						}
 						""");
 			}
-			else if (usuario.getRol().equals("normal")) {
-				out.print("""
-						{
-						\"status\": 200, 
-						\"redirect\": \"menu.jsp\"
-						}
-						""");
-			}
 			out.flush();
 		}
 		catch (Exception e) {
-			System.err.println("LoginServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
+			System.err.println("UsuarioCrearServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
 		}
 	}
+
 }

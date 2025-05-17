@@ -1,21 +1,21 @@
 package model;
 
 public class UsuarioModelo {
-	private int id;
+	private Integer id;
 	private String nombre;
 	private String rol;
 	
-	public UsuarioModelo(int id, String nombre, String rol) {
+	public UsuarioModelo(Integer id, String nombre, String rol) {
 		setId(id);
 		setNombre(nombre);
 		setRol(rol);
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

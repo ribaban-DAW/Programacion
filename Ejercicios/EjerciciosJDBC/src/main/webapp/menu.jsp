@@ -7,12 +7,6 @@
 <title>Menú</title>
 </head>
 <body>
-<%
-	if (session.getAttribute("user") == null) {
-		response.sendRedirect("403.jsp");
-		return;
-	}
-%>
-<h1>Menú</h1>
+	<h1>Menú</h1>
 </body>
 </html>

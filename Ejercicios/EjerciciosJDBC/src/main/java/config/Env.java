@@ -15,8 +15,7 @@ public class Env {
 			setDBContraseña(props.getProperty("DB_PASSWORD"));
 		}
 		catch (Exception e) {
-			System.err.println("No se ha podido cargar el archivo");
-			e.printStackTrace();
+			System.err.println("Env: No se ha podido cargar el archivo: " + e.getMessage());
 		}
 	}
 
