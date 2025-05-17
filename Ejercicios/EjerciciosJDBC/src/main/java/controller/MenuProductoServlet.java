@@ -6,26 +6,28 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.UsuarioModelo;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.List;
 
 import config.Env;
-import dao.UsuarioDAO;
 import db.Conexion;
-import model.UsuarioModelo;
+import dao.ProductoDAO;
+import model.ProductoModelo;
 
 /**
- * Servlet implementation class PanelAdminServlet
+ * Servlet implementation class MenuProductoServlet
  */
-@WebServlet("/PanelAdminServlet")
-public class PanelAdminServlet extends HttpServlet {
+@WebServlet("/MenuProductoServlet")
+public class MenuProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PanelAdminServlet() {
+    public MenuProductoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,22 +46,17 @@ public class PanelAdminServlet extends HttpServlet {
 			response.sendRedirect("401.jsp");
 			return;
 		}
-		else if (!usuario.getRol().equals("admin")) {
-			System.err.println("SUS " + usuario.getNombre());
-			response.sendRedirect("403.jsp");
-			return;
-		}
 		
 		Env env = new Env();
 		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
 		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
-			List<UsuarioModelo> usuarios = new UsuarioDAO(conn).buscar();
-			request.setAttribute("usuarios", usuarios);
-			request.getRequestDispatcher("/WEB-INF/view/panel_admin.jsp").forward(request, response);
+			List<ProductoModelo> productos = new ProductoDAO(conn).buscar();
+			request.setAttribute("productos", productos);
+			request.getRequestDispatcher("WEB-INF/view/menu_producto.jsp").forward(request, response);
 			return;
 		}
 		catch (Exception e) {
-			System.err.println("PanelAdminServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
+			System.err.println("MenuProductoServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
 		}
 		response.sendRedirect("500.jsp");
 	}

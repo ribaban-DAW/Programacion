@@ -1,27 +1,27 @@
 package model;
 
 public class ProductoModelo {
-	private int id;
+	private Integer id;
 	private String nombre;
-	private double precio;
+	private Double precio;
 	private String imagenURL;
 	
-	public ProductoModelo(int id, String nombre, double precio, String imagenURL) {
+	public ProductoModelo(Integer id, String nombre, Double precio, String imagenURL) {
 		setId(id);
 		setNombre(nombre);
 		setPrecio(precio);
 		setImagenURL(imagenURL);
 	}
 	
-	public ProductoModelo(int id, String nombre, double precio) {
+	public ProductoModelo(Integer id, String nombre, Double precio) {
 		this(id, nombre, precio, "unknown.png");
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -33,11 +33,11 @@ public class ProductoModelo {
 		this.nombre = nombre;
 	}
 
-	public double getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(double precio) {
+	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 

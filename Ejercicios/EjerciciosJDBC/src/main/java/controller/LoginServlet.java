@@ -78,13 +78,19 @@ public class LoginServlet extends HttpServlet {
 				out.print("""
 						{
 						\"status\": 200, 
-						\"redirect\": \"menu.jsp\"
+						\"redirect\": \"MenuProductoServlet\"
 						}
 						""");
 			}
 			out.flush();
 		}
 		catch (Exception e) {
+			out.print("""
+					{
+						\"status\": 500,
+						\"redirect\": \"500.jsp\"
+					}
+					""");
 			System.err.println("LoginServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
 		}
 	}

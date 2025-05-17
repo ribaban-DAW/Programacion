@@ -76,6 +76,12 @@ public class UsuarioCrearServlet extends HttpServlet {
 			out.flush();
 		}
 		catch (Exception e) {
+			out.print("""
+					{
+						\"status\": 500,
+						\"redirect\": \"500.jsp\"
+					}
+					""");
 			System.err.println("UsuarioCrearServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
 		}
 	}

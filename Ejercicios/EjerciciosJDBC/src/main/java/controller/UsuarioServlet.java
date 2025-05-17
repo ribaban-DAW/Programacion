@@ -55,7 +55,7 @@ public class UsuarioServlet extends HttpServlet {
 				}
 				catch (Exception e) {
 					request.setAttribute("error", "El id tiene que ser un número");
-					request.getRequestDispatcher("/WEB-INF/view/panel_admin.jsp").forward(request, response);
+					request.getRequestDispatcher("WEB-INF/view/panel_admin.jsp").forward(request, response);
 					return;
 				}
 			}
@@ -74,7 +74,7 @@ public class UsuarioServlet extends HttpServlet {
 				String rol = request.getParameter("role");
 				List<UsuarioModelo> usuarios = dao.buscar(id, nombre, rol);
 				request.setAttribute("usuarios", usuarios);
-				request.getRequestDispatcher("/WEB-INF/view/panel_admin.jsp").forward(request, response);
+				request.getRequestDispatcher("WEB-INF/view/panel_admin.jsp").forward(request, response);
 				return;
 			}
 			else if (accion.equals("update")) {
@@ -104,7 +104,6 @@ public class UsuarioServlet extends HttpServlet {
 		catch (Exception e) {
 			System.err.println("UsuarioServlet: No se ha podido conectar a la base de datos: " + e.getMessage());
 		}
-		System.err.println("Unreachable");
 		response.sendRedirect("500.jsp");
 	}
 }

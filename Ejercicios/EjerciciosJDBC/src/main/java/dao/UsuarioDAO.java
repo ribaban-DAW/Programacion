@@ -86,9 +86,8 @@ public class UsuarioDAO {
 	}
 	
 	public UsuarioModelo buscar(Integer id) {
-		List<UsuarioModelo> usuario = buscar(id, null, null);
-		System.out.println(usuario.getFirst().getId());
-		return (usuario.size() == 0) ? null : usuario.getFirst();
+		List<UsuarioModelo> usuarios = buscar(id, null, null);
+		return (usuarios.size() == 0) ? null : usuarios.getFirst();
 	}
 	
 	public UsuarioModelo buscarExacto(String nombre) {

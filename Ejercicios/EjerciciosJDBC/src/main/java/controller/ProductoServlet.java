@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+// NOTA: Esto se hará cuando tenga que hacer una vista para gestionar los productos
 /**
  * Servlet implementation class ProductoServlet
  */
