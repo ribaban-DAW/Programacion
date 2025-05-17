@@ -73,6 +73,9 @@ public class PedidoServlet extends HttpServlet {
 				continue;
 			}
 			int cantidad = Integer.parseInt(cantidadString);
+			if (cantidad == 0) {
+				continue;
+			}
 			double precio = Double.parseDouble(precioString);
 			pedidoProductos.add(new PedidoProductoModelo(new ProductoModelo(i, nombre, precio), cantidad));
 		}

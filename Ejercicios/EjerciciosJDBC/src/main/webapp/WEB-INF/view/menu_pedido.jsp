@@ -53,5 +53,6 @@
 			</tr>
 		</tfoot>
 	</table>
+	<p><a href="MenuProductoServlet">Volver a pedir</a></p>
 </body>
 </html>
