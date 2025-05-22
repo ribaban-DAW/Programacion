@@ -54,6 +54,8 @@ public class UsuarioActualizarServlet extends HttpServlet {
 			return;
 		}
 		
+		int id = Integer.parseInt(idString);
+		
 		{
 			HttpSession sesion = request.getSession(false);
 			if (sesion == null) {
@@ -67,7 +69,7 @@ public class UsuarioActualizarServlet extends HttpServlet {
 				return;
 			}
 			UsuarioModelo usuario = (UsuarioModelo)sesion.getAttribute("user");
-			if (usuario.getRol().equals("admin") && !rol.equals("admin")) {
+			if (usuario.getId().equals(id) && !rol.equals(usuario.getRol())) {
 				out.print("""
 						{
 							\"status\": 400,
@@ -78,8 +80,6 @@ public class UsuarioActualizarServlet extends HttpServlet {
 				return;
 			}
 		}
-		
-		int id = Integer.parseInt(idString);
 		
 		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {
 			UsuarioDAO dao = new UsuarioDAO(conn);
