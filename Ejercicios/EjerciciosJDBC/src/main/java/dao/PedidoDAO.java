@@ -56,6 +56,13 @@ public class PedidoDAO {
 		}
 		return null;
 	}
+	
+	public PedidoModelo crear(UsuarioModelo usuario, List<PedidoProductoModelo> pedidoProductos, int cantidadTotalProductos) throws SQLException {
+		if (cantidadTotalProductos == 0) {
+			return new PedidoModelo(usuario.getId(), usuario, pedidoProductos);
+		}
+		return crear(usuario, pedidoProductos);
+	}
 
 	private void setConexion(Connection conexion) {
 		this.conexion = conexion;

@@ -61,6 +61,7 @@ public class PedidoServlet extends HttpServlet {
 		UsuarioModelo usuario = (UsuarioModelo)sesion.getAttribute("user");
 		int cantidadProductos = obtenerCantidadProductos();
 
+		int cantidadTotalProductos = 0;
 		List<PedidoProductoModelo> pedidoProductos = new ArrayList<>();
 		for (int i = 1; i <= cantidadProductos; ++i) {
 			String cantidadString = request.getParameter("id-" + i);
@@ -74,13 +75,14 @@ public class PedidoServlet extends HttpServlet {
 			if (cantidad == 0) {
 				continue;
 			}
+			cantidadTotalProductos += cantidad;
 			double precio = Double.parseDouble(precioString);
 			pedidoProductos.add(new PedidoProductoModelo(new ProductoModelo(i, nombre, precio), cantidad));
 		}
 		
 		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {		
 			try {				
-				PedidoModelo pedido = new PedidoDAO(conn).crear(usuario, pedidoProductos);
+				PedidoModelo pedido = new PedidoDAO(conn).crear(usuario, pedidoProductos, cantidadTotalProductos);
 				request.setAttribute("pedido", pedido);
 				request.getRequestDispatcher("WEB-INF/view/menu_pedido.jsp").forward(request, response);
 				return;
