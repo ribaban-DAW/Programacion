@@ -6,7 +6,7 @@ async function enviarFormulario(resource) {
     })
     .then(response => response.json())
     .then(data => {
-    	if (data.status == 200 || data.status == 500) {
+    	if (data.status != 400) {
     		window.location.href = data.redirect
     	}
 		return data

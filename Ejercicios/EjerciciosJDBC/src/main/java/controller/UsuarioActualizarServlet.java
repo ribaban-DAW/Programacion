@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.UsuarioModelo;
 
 import java.io.IOException;
@@ -52,6 +53,32 @@ public class UsuarioActualizarServlet extends HttpServlet {
 			out.flush();
 			return;
 		}
+		
+		{
+			HttpSession sesion = request.getSession(false);
+			if (sesion == null) {
+				out.print("""
+						{
+							\"status\": 401,
+							\"redirect\": \"401.jsp\"
+						}
+						""");
+				out.flush();
+				return;
+			}
+			UsuarioModelo usuario = (UsuarioModelo)sesion.getAttribute("user");
+			if (usuario.getRol().equals("admin") && !rol.equals("admin")) {
+				out.print("""
+						{
+							\"status\": 400,
+							\"message\": \"No puedes cambiarte de rol a ti mismo\"
+						}
+						""");
+				out.flush();
+				return;
+			}
+		}
+		
 		int id = Integer.parseInt(idString);
 		
 		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {
