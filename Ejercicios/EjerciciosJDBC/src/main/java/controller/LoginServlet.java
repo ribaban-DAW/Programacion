@@ -51,9 +51,7 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {			
 			UsuarioModelo usuario = new UsuarioDAO(conn).autenticar(nombre, contraseña);
 			if (usuario == null) {
 				out.print("""

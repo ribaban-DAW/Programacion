@@ -61,9 +61,7 @@ public class UsuarioServlet extends HttpServlet {
 			}
 		}
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {
 			UsuarioDAO dao = new UsuarioDAO(conn);
 			if (accion.equals("create")) {				
 				request.getRequestDispatcher("WEB-INF/view/usuario_crear.jsp").forward(request, response);

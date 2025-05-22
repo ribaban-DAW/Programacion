@@ -40,9 +40,7 @@ public class PedidoServlet extends HttpServlet {
     private int obtenerCantidadProductos() {
     	int cantidad = 0;
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {			
 			cantidad = new ProductoDAO(conn).obtenerCantidad();
 		}
 		catch (Exception e) {
@@ -80,9 +78,7 @@ public class PedidoServlet extends HttpServlet {
 			pedidoProductos.add(new PedidoProductoModelo(new ProductoModelo(i, nombre, precio), cantidad));
 		}
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {		
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {		
 			try {				
 				PedidoModelo pedido = new PedidoDAO(conn).crear(usuario, pedidoProductos);
 				request.setAttribute("pedido", pedido);

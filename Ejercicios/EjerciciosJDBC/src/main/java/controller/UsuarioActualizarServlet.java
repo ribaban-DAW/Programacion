@@ -54,9 +54,7 @@ public class UsuarioActualizarServlet extends HttpServlet {
 		}
 		int id = Integer.parseInt(idString);
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {
 			UsuarioDAO dao = new UsuarioDAO(conn);
 			UsuarioModelo usuario = dao.buscar(id);
 			UsuarioModelo existe = dao.buscarExacto(nombre);

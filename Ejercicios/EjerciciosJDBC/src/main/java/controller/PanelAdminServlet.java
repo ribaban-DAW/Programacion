@@ -50,9 +50,7 @@ public class PanelAdminServlet extends HttpServlet {
 			return;
 		}
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {		
 			List<UsuarioModelo> usuarios = new UsuarioDAO(conn).buscar();
 			request.setAttribute("usuarios", usuarios);
 			request.getRequestDispatcher("/WEB-INF/view/panel_admin.jsp").forward(request, response);

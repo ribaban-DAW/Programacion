@@ -47,9 +47,7 @@ public class MenuProductoServlet extends HttpServlet {
 			return;
 		}
 		
-		Env env = new Env();
-		Conexion conexion = new Conexion(env.getDBUsuario(), env.getDBContraseña());
-		try (Connection conn = conexion.conectar("BaseDeDatos")) {			
+		try (Connection conn = new Conexion().conectar("BaseDeDatos")) {			
 			List<ProductoModelo> productos = new ProductoDAO(conn).buscar();
 			request.setAttribute("productos", productos);
 			request.getRequestDispatcher("WEB-INF/view/menu_producto.jsp").forward(request, response);

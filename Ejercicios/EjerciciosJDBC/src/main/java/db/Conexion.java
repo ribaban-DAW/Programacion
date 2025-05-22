@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Connection;
 
+import config.Env;
+
 public class Conexion {
 	private final String DEFAULT_PROTOCOL = "jdbc";
 	private final String DEFAULT_SUBPROTOCOL = "mysql";
@@ -15,6 +17,17 @@ public class Conexion {
 	private int port;
 	private String usuario;
 	private String contraseña;
+	
+	public Conexion() {
+		setProtocol(DEFAULT_PROTOCOL);
+		setSubprotocol(DEFAULT_SUBPROTOCOL);
+		setHost(DEFAULT_HOST);
+		setPort(DEFAULT_PORT);
+		
+		Env env = new Env();
+		setUsuario(env.getDBUsuario());
+		setContraseña(env.getDBContraseña());
+	}
 	
 	public Conexion(String usuario, String contraseña) {
 		setProtocol(DEFAULT_PROTOCOL);
